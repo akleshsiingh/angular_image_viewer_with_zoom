@@ -1,0 +1,25 @@
+<nav>
+    <div class="container">
+        <div class="logo">Details</div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="preview-image" appImageZoomDirective (eZoomCoordinates)="zoomOutput($event)">
+        <img [src]="selectedImage" alt="">
+    </div>
+    <div class="slider-container">
+        <div class="prev" (click)="showPrevious()" *ngIf="!isFirstThumbVisible"></div>
+        <div class="next" (click)="showNext()" *ngIf="!isLastThumbVisible"></div>
+
+        <ul class="slider" [style.width]="totalWidth+'px'" [style.transform]="'translateX(' + -translate + 'px)'">
+
+            <li class="item thumb" *ngFor="let image of productImages" [class.active]="selectedImage===image" (mouseenter)="selectImage(image)">
+                <img [src]="image" alt="">
+            </li>
+        </ul>
+
+    </div>
+</div>
+
+<app-product-zoom *ngIf="!!zoomCoordinates" [zoomCoordinates]="zoomCoordinates" [selectedIMG]="selectedImage"></app-product-zoom>

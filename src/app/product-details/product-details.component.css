@@ -1,0 +1,86 @@
+.container {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.container .preview-image {
+    width: 500px;
+    height: 300px;
+    position: relative;
+    cursor: crosshair;
+}
+
+.container .preview-image img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.slider-container {
+    overflow: hidden;
+    width: 500px;
+    position: relative;
+}
+
+.slider-container .prev {
+    width: 10px;
+    background-color: black;
+    height: 70px;
+    position: absolute;
+    z-index: 2;
+}
+
+.slider-container .next {
+    width: 10px;
+    background-color: black;
+    height: 70px;
+    position: absolute;
+    right: 0;
+    z-index: 2;
+}
+
+.slider {
+    list-style: none;
+    display: flex;
+    overflow: hidden;
+    transition: 1s ease-in-out;
+}
+
+.slider .thumb {
+    width: 70px;
+    height: 70px;
+    display: inline-block;
+    align-items: center;
+    display: flex;
+    margin-right: 10px;
+    align-items: center;
+    border: 2px solid transparent;
+}
+
+.slider .thumb img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}
+
+.slider .thumb.active {
+    border: 2px solid grey;
+}
+
+app-product-zoom {
+    position: fixed;
+    right: 35px;
+    top: 70px;
+    left: 570px;
+    bottom: 70px;
+    background-color: chartreuse;
+}
+
+.lens {
+    position: absolute;
+    border: 1px solid #ad1919;
+    /*set the size of the lens:*/
+    width: 40px;
+    height: 40px;
+    top: 0;
+}
