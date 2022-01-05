@@ -4,8 +4,8 @@
 }
 
 .container .preview-image {
-    width: 500px;
-    height: 300px;
+    max-width: 500px;
+    max-height: 300px;
     position: relative;
     cursor: crosshair;
 }
