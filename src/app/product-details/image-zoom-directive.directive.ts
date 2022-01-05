@@ -3,31 +3,22 @@ import { AfterViewInit, Directive, ElementRef, EventEmitter, HostListener, Outpu
 @Directive({
   selector: '[appImageZoomDirective]'
 })
-export class ImageZoomDirectiveDirective implements AfterViewInit {
+export class ImageZoomDirectiveDirective {
 
   private lens:any ;
    @Output() eZoomCoordinates = new EventEmitter();
   constructor(private el:ElementRef,private render2:Renderer2) { }
 
-  ngAfterViewInit(): void {
-    console.log('after view init');
-
-  }
-
   @HostListener('mouseenter', ['$event'])
   onMouseEnter(event: MouseEvent) {
-    console.log('mouse enter')
     const lens = this.render2.createElement('div');
     this.render2.addClass(lens,'lens');
     this.render2.appendChild(this.el.nativeElement, lens);
-
     this.lens = lens;
-    console.log(lens);
   }
 
   @HostListener('mouseleave', ['$event'])
   onMouseLeave(event: MouseEvent) {
-    console.log('mouse leave')
     this.eZoomCoordinates.emit(null);
     this.render2.removeChild(this.el.nativeElement,this.lens);
   }
@@ -37,14 +28,9 @@ export class ImageZoomDirectiveDirective implements AfterViewInit {
     if(!event){
       return;
     }
-    // console.log(event);
-    // console.log(event.offsetX, event.offsetY);
     this.movelens(event);
   }
 
-  
-
-  
   private movelens(event:MouseEvent){
     let pos, x, y;
     pos = this.getCursorPos(event);
@@ -54,7 +40,6 @@ export class ImageZoomDirectiveDirective implements AfterViewInit {
   x = pos.x - (this.lens.offsetWidth / 2);
   y = pos.y - (this.lens.offsetHeight / 2);
   /*prevent the this.lens from being positioned outside the image:*/
- // console.log(img.target, this.lens.offsetWidth)
   if (x > pos.width - this.lens.offsetWidth) {
     x = pos.width - this.lens.offsetWidth;
   }
@@ -64,8 +49,6 @@ export class ImageZoomDirectiveDirective implements AfterViewInit {
   /*set the position of the this.lens:*/
   this.lens.style.left = x + "px";
   this.lens.style.top = y + "px";
-
- // console.log(pos.x*100/pos.width, pos.y*100/pos.height);
 
   this.eZoomCoordinates.emit({x : pos.x*100/pos.width, y:  pos.y*100/pos.height});
   }
